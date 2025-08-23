@@ -22,8 +22,6 @@ for x in numbers[1:]:
         
 
 
-    
-
 # print(longest_run)
 print(longest_count)
 
