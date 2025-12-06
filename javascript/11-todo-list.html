@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>To do list practice 1</h1>
+    <input type="text" name="text" id="task" placeholder="Enter your todo">
+    <button onclick="displayTask()">Add</button>
+
+
+    <script>
+
+        // console.log(newTask)
+        allTasks = []
+        
+        function displayTask() {
+            const newTask = document.getElementById('task').value
+            allTasks.push(newTask)
+            console.log(allTasks)
+            
+
+        }
+
+
+    </script>
+    
+</body>
+</html>
