@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counters quantities</title>
+  </head>
+  <body>
+    <h1>Cart quantity</h1>
+
+   
+    <button value="1" ">Add to Cart</button>
+    <button value="2" ">+2</button>
+    <button value="3" ">+3</button>
+    <button value="4" ">+4</button>
+    <button value="5" ">+5</button>
+    <button value="0" ">Reset Cart</button>
+    <button value="-2" ">-2</button>
+    <button value="-3" ">-3</button>
+
+    <p class="display-cart"></p>
+    <p class="special-messages"></p>
+
+    <script>
+    // --- GLOBALS ---
+    let cartQuantity = 0;
+    const MAX_QUANTITY = 10;
+    
+    // Zmienne kontenerów
+    const displayContainer = document.querySelector(".display-cart");
+    const specialMessagesContainer = document.querySelector(".special-messages");
+    const allButtons = document.querySelectorAll("button");
+    
+    // Stałe komunikaty
+    const CART_RESET_MESSAGE = "Cart was reset!";
+    const CART_FULL_WARNING = "Cart cannot hold more than 10 items!";
+    const CART_EMPTY_WARNING = "Cart quantity cannot be negative!";
+
+    // --- FUNKCJE ---
+
+    // 1. Główna funkcja aktualizująca widok
+    function updateDisplay(message = "") {
+        displayContainer.innerHTML = `Cart quantity: ${cartQuantity}`;
+        specialMessagesContainer.innerText = message;
+    }
+
+    // 2. Funkcja obsługująca logikę koszyka
+    function processCart(itemQuantity) {
+        let newMessage = "";
+        let newQuantity = cartQuantity + itemQuantity;
+        
+        // A) WALIDACJA LIMITU GÓRNEGO
+        if (newQuantity > MAX_QUANTITY) {
+            newMessage = CART_FULL_WARNING;
+            
+        // B) WALIDACJA LIMITU DOLNEGO (ujemne ilości)
+        } else if (newQuantity < 0) {
+            newMessage = CART_EMPTY_WARNING;
+            
+        // C) RESET KOSZYKA (Wartość 0)
+        } else if (itemQuantity === 0) {
+            cartQuantity = 0;
+            newMessage = CART_RESET_MESSAGE;
+            
+        // D) OPERACJA JEST POPRAWNA
+        } else {
+            cartQuantity = newQuantity;
+            newMessage = ""; // Czyścimy wiadomości specjalne
+        }
+        
+        // Wyświetlenie wyniku i komunikatów
+        updateDisplay(newMessage);
+    }
+    
+    // 3. Funkcja obsługująca kliknięcie (używamy 'this')
+    function handleButtonClick() {
+        // Pobieramy wartość z klikniętego przycisku (this)
+        const selectedValue = Number(this.value); 
+        
+        // Przekazujemy wartość do logiki koszyka
+        processCart(selectedValue);
+    }
+
+    // 4. Inicjalizacja (Wywołana tylko raz!)
+    function initializeCartListeners() {
+        
+        Array.from(allButtons).forEach((button) => {
+            if (button.value !== undefined) {
+                button.addEventListener('click', handleButtonClick);
+            }
+        });
+        
+      
+        // Initial state 
+        updateDisplay("Add something to your cart.");
+    }
+    
+    // Uruchomienie skryptu
+    initializeCartListeners();
+
+</script>
+  </body>
+</html>

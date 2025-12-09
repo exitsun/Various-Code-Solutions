@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booleans</title>
+  </head>
+  <body>
+    <script>
+      true;
+      false;
+      console.log(3 > 5);
+      console.log(5 == "5.00");
+      //   this disgusting thing is a true value
+      console.log(5 === "5.00");
+      // this is false as it should be
+
+      if (false) {
+        console.log("Hello");
+      } else {
+        console.log("else");
+      }
+
+      const age = 15;
+
+      if (age >= 18) {
+        console.log("Can operate machinery");
+      } else if (age >= 14) {
+        console.log("Almost applicable but still cannot operate machinery");
+      } else {
+        console.log("Cannot operate machinery");
+      }
+
+      true ? "truthy" : "falsy"; // ternary operator
+      // if the statement is true assign 'truthy to the variable, else 'falsy'
+    </script>
+  </body>
+</html>

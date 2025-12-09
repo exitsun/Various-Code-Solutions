@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .cost-input {
+        padding: 10px;
+      }
+      .calculate-button {
+        color: white;
+        font-size: 15px;
+        background-color: green;
+        border: none;
+        padding: 10px 20px;
+      }
+      .red {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Amazon shipping calculator</h1>
+    <p>Orders under $40 = +$10 shipping</p>
+    <p>Orders above $40 = FREE shipping</p>
+    <input class="cost-input" type="number" name="client-amount"
+    id="client-amount" onkeydown="handleKeyboard()" " />
+
+    <button class="calculate-button" onclick="calculatePrice()">
+      Calculate
+    </button>
+    <p class="final-price"></p>
+
+    <script>
+      displayPrice();
+      const errorMessage = "Error: cost cannot be less than $0";
+
+      function handleKeyboard() {
+        if (event.key === "Enter") {
+          calculatePrice();
+        }
+      }
+      function calculatePrice() {
+        const amountInput =
+          document.getElementById("client-amount").valueAsNumber;
+        let price = 0;
+        let discount = false;
+
+        if (isNaN(amountInput)) {
+          price = "Invalid input.";
+        } else if (amountInput <= 0) {
+          price = "Error: cost cannot be less than $0.";
+        } else if (amountInput <= 40) {
+          price = amountInput + 10;
+        } else {
+          price = amountInput;
+          discount = true;
+        }
+
+        displayPrice(price, discount);
+      }
+      function displayPrice(price, discount) {
+        const finalPrice = document.querySelector(".final-price");
+
+        if (price === undefined) {
+          finalPrice.innerHTML = `Your result will appear here. `;
+          return; // IMPORTANT stop the function here this instrction is just for the beginning of the function state.
+        }
+        if (discount === true) {
+          finalPrice.innerHTML = `You've got a discount! Your total is: $${price.toFixed(
+            2
+          )}`;
+        } else if (typeof price === "string") {
+          finalPrice.innerHTML = `${price}`;
+        } else {
+          finalPrice.innerHTML = `Your total: $${price.toFixed(2)}`;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>You live you die</title>
+  </head>
+  <body>
+    <script>
+      let num = Math.random();
+      let guess = "Heads";
+      message = num <= 0.5 ? "Heads" : "Tails";
+
+      if (num <= 0.5) {
+        console.log("You guessed correctly ");
+      } else {
+        console.log("Your guess was incorrect");
+      }
+
+      console.log(message);
+    </script>
+  </body>
+</html>

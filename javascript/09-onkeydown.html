@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Type text below:</h1>
+
+    <input type="text" name="text" id="text" onkeyup="displayDynamicText()" />
+    <button>This is for decoration only</button>
+    <p class="dynamic-text"></p>
+
+    <script>
+      function displayDynamicText() {
+        let inputField = document.getElementById("text").value;
+        console.log(inputField);
+        const dynamicText = document.querySelector(".dynamic-text");
+
+        dynamicText.innerText = inputField;
+      }
+    </script>
+  </body>
+</html>

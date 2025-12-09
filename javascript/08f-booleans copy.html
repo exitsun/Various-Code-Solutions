@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>You live you die</title>
+  </head>
+  <body>
+    <button onclick="flipToLive(choice='Heads')">Heads</button>
+    <button onclick="flipToLive(choice='Tails')">Tails</button>
+    <script>
+      let flip = JSON.parse(localStorage.getItem("flip")) || {
+        // REMEMBER
+        wins: 0,
+        losses: 0,
+      };
+
+      function flipToLive(choice) {
+        let num = Math.random();
+        let heads = "Heads";
+        let tails = "Tails";
+
+        let computerChoice = num <= 0.5 ? heads : tails;
+
+        if (computerChoice === choice) {
+          alert(`${choice} and ${computerChoice} You live.`);
+          flip.wins += 1;
+        } else {
+          alert(`${choice} and ${computerChoice} Bad luck. You die.`);
+          flip.losses += 1;
+        }
+        localStorage.setItem("flip", JSON.stringify(flip)); // REMEMBER
+        console.log(flip);
+      }
+    </script>
+  </body>
+</html>

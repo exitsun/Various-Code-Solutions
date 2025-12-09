@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Functions</title>
+  </head>
+  <body>
+    <script>
+      function greet(name) {
+        if (!name) {
+          console.log("Hello there! :3");
+        } else {
+          console.log(`HELLO! ${name}`);
+        }
+      }
+      greet("Cindy");
+      greet("Brenda");
+      greet("Gay Ray ");
+      greet();
+
+      function convertToFahrenheit(celcius) {
+        result = (celcius * 9) / 5 + 32;
+        console.log(
+          `${celcius} degrees in celcius equals to: ${result.toFixed(
+            2
+          )} degrees Fahrenheit`
+        );
+      }
+      convertToFahrenheit(23);
+
+      function convertToCelcius(fahrenheit) {
+        result = ((fahrenheit - 32) * 5) / 9;
+        console.log(
+          `${fahrenheit} degrees in Fahrenheit equals to: ${result.toFixed(
+            2
+          )} degrees celcius`
+        );
+      }
+      convertToCelcius(90);
+
+      function convertTemperature(degrees, unit) {
+        if (unit === "C") {
+          result = (degrees * 9) / 5 + 32;
+          console.log(
+            `${degrees} degrees in celcius equals to: ${result.toFixed(
+              2
+            )} degrees Fahrenheit`
+          );
+        } else if (unit === "F") {
+          result = ((degrees - 32) * 5) / 9;
+          console.log(
+            `${degrees} degrees in Fahrenheit equals to: ${result.toFixed(
+              2
+            )} degrees celcius`
+          );
+        }
+      }
+      convertTemperature(23, "F");
+      convertTemperature(12, "C");
+
+      function convertLength(length, from, to) {
+        allowedUnits = ["miles", "km", "ft"];
+
+        if (!allowedUnits.includes(from) || !allowedUnits.includes(to)) {
+          result = "Invalid unit.";
+        } else if (from === "miles" && to === "km") {
+          result = length * 1.6;
+        } else if (from === "km" && to === "miles") {
+          result = length / 1.6;
+        } else if (from === "miles" && to === "ft") {
+          result = length * 5280;
+        } else if (from === "km" && to === "ft") {
+          result = length * 3281;
+        } else {
+          result = length;
+        }
+
+        if (result === "Invalid unit.") {
+          console.log(
+            `${result} ${from} is not a valid unit in this calculator.`
+          );
+        } else {
+          console.log(
+            `Conversion results: ${length} ${from} is ${result} ${to}.`
+          );
+        }
+      }
+      convertLength(1000, "miles", "km");
+      convertLength(1000, "km", "km");
+      convertLength(1000, "km", "miles");
+      convertLength(100, "km", "ft");
+      convertLength(120, "miles", "ft");
+      convertLength(120, "lbs", "kg");
+    </script>
+  </body>
+</html>

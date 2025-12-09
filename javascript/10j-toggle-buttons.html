@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        background-color: black;
+      }
+      button {
+        margin: 2px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+      }
+      .is-toggled {
+        background-color: rgb(27, 27, 27);
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="toggleButton(this)" class="gaming category-button">
+      Gaming
+    </button>
+    <button onclick="toggleButton(this)" class="tech category-button">
+      Tech
+    </button>
+    <button onclick="toggleButton(this)" class="music category-button">
+      Music
+    </button>
+    <script>
+      const categoryButton = document.querySelectorAll(".category-button");
+      function toggleButton(clickedElement) {
+        // console.log(categoryButton);
+        categoryButton.forEach((button) => {
+          button.classList.remove("is-toggled");
+        });
+        clickedElement.classList.toggle("is-toggled");
+      }
+    </script>
+  </body>
+</html>

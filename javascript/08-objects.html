@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Objects</title>
+  </head>
+  <body>
+    <script>
+      // property value pair if does not exist -> undefined
+      //   make code more organized
+      const product = {
+        name: "socks",
+        price: 1090,
+      };
+      console.log(product.name); //dot noration
+      console.log(product.price);
+      product.name = "cotton socks";
+      console.log(product.name);
+      console.log(product.new);
+
+      const product2 = {
+        name: "shirt",
+        "delivery-time": "1 day",
+        rating: {
+          //nested object
+          stars: 4.5,
+          count: 87,
+        },
+        fun: function function1() {
+          console.log("The string inside a function");
+        },
+      };
+
+      console.log(product2["name"]); //bracket notation, with this you can use the name-value because normally - means math
+      console.log(product2["delivery-time"]);
+      console.log(product2.rating.count);
+      product2.fun();
+
+      console.log(JSON.stringify(product2)); //result is a string
+      const jsonString = JSON.parse(JSON.stringify(product2));
+      console.log(jsonString);
+
+      //   Local storage
+
+      //   localStorage.setItem();
+      //   localStorage.getItem();
+
+      console.log("hello".length);
+      console.log("hello".toUpperCase());
+      console.log("hello");
+
+      const object1 = {
+        message: "hello", //points to the reference in the computer's memory -> efficiency
+      };
+
+      const object2 = object1; //copies the reference Copy by Reference
+
+      object1.message = "Good job!";
+      console.log(object1);
+      console.log(object2);
+
+      const object3 = {
+        message: "Good job!",
+      };
+
+      console.log(object3 === object1); //compares the references -> false
+      console.log(object2 === object1); //same reference -> true
+
+      const object4 = {
+        message: "Good job!",
+        price: 799,
+      };
+
+      //   const message = object4.message;
+      const { message, price } = object4; //destructuring
+
+      console.log(message);
+      console.log(price);
+
+      const object5 = {
+        // message: message,
+        message, //shorthand property
+        // method: function function1() {
+        //   console.log("method");
+        // },
+        method() {
+          console.log("shorthand method");
+        },
+      };
+      console.log(object5);
+      object5.method();
+    </script>
+  </body>
+</html>

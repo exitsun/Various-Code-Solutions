@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RPS game</title>
+    <style>
+      body {
+        background-color: rgb(12, 12, 12);
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .title {
+        font-size: 30px;
+        font-weight: bold;
+      }
+      .move-icon {
+        height: 50px;
+      }
+      .move-button {
+        background: transparent;
+        border: 3px solid white;
+        border-radius: 50%;
+        padding: 20px;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+      .move-icon {
+        height: 40px;
+      }
+      .outcome {
+        font-size: 25px;
+        font-weight: bold;
+        margin: 50px 0;
+      }
+      .match-history {
+        margin-top: 30px;
+      }
+      .reset-score-button {
+        display: block;
+        padding: 10px 30px;
+        cursor: pointer;
+      }
+      .extra {
+        margin: 10px 0;
+        padding: 5px 40px;
+        border-radius: 15px;
+        border: none;
+        background-color: rgb(255, 216, 20);
+        text-decoration: none;
+        color: black;
+      }
+      .extra:hover {
+        background-color: #e2c108;
+        color: rgb(36, 36, 36);
+      }
+      .category-button {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgb(58, 58, 58);
+        cursor: pointer;
+      }
+      .is-toggled {
+        background-color: whitesmoke;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">Rock paper scissors</h1>
+    <button onclick=" playGame('rock')" class="move-button">
+      <img src="./rock-emoji.png" class="move-icon" />
+    </button>
+    <button onclick=" playGame('paper')" class="move-button">
+      <img src="./paper-emoji.png" class="move-icon" />
+    </button>
+    <button onclick=" playGame('scissors')" class="move-button">
+      <img src="./scissors-emoji.png" class="move-icon" />
+    </button>
+
+    <p class="outcome"></p>
+    <p class="outcome-detail"></p>
+    <p class="match-history"></p>
+    <button
+      oclass="move-icon"
+      onclick="
+    score.wins = 0;
+    score.losses = 0;
+    score.ties = 0; 
+    localStorage.removeItem('score');
+    updateScore()
+    gameOutcome()
+    "
+      class="reset-score-button"
+    >
+      Reset game
+    </button>
+
+    <p><a class="extra" href="#">Click here</a> to see my new application</p>
+    <button class="test">Test</button>
+
+    <script>
+      "use strict";
+      const outcome = document.querySelector(".outcome");
+      const outcomeDetail = document.querySelector(".outcome-detail");
+      const matchHistory = document.querySelector(".match-history");
+
+      let score = JSON.parse(localStorage.getItem("score")) || {
+        //boolean if value not truthy do the other side of the code
+        wins: 0,
+        losses: 0,
+        ties: 0,
+      };
+      updateScore();
+      gameOutcome();
+
+      function playGame(playerMove) {
+        const computerMove = pickComputerMove();
+        let result = "";
+
+        if (playerMove === "scissors") {
+          if (computerMove === "rock") {
+            result = "You lose!";
+          } else if (computerMove === "paper") {
+            result = "You win!";
+          } else {
+            result = "Tie game!";
+          }
+        } else if (playerMove === "rock") {
+          if (computerMove === "rock") {
+            result = "Tie game!";
+          } else if (computerMove === "paper") {
+            result = "You lose!";
+          } else {
+            result = "You win!";
+          }
+        } else if (playerMove === "paper") {
+          if (computerMove === "rock") {
+            result = "You lose!";
+          } else if (computerMove === "paper") {
+            result = "Tie game!";
+          } else {
+            result = "You win!";
+          }
+        }
+
+        if (result === "You win!") {
+          score.wins++;
+        } else if (result === "You lose!") {
+          score.losses++;
+        } else if (result === "Tie game!") {
+          score.ties++;
+        }
+
+        localStorage.setItem("score", JSON.stringify(score)); //local storage przechowuje jedynie string wiec stringify aby zachować
+        updateScore();
+        gameOutcome(playerMove, computerMove, result);
+      }
+
+      function updateScore() {
+        matchHistory.innerHTML = `Wins: ${score.wins}. Losses: ${score.losses}. Ties: ${score.ties}`;
+      }
+      function gameOutcome(playerMove, computerMove, result) {
+        if (result) {
+          outcome.innerHTML = `${result}`;
+          outcomeDetail.innerHTML = `You picked <img src="./${playerMove}-emoji.png" class="move-icon"/>. Computer picked: <img src="./${computerMove}-emoji.png" class="move-icon"/>.`;
+        } else {
+          outcome.innerHTML = "Play game!";
+          outcomeDetail.innerHTML = "Pick your move!";
+        }
+      }
+
+      function pickComputerMove() {
+        let computerMove = "";
+        let randomNumber = Math.random();
+
+        if (randomNumber >= 0 && randomNumber < 1 / 3) {
+          computerMove = "rock";
+        } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+          computerMove = "paper";
+        } else {
+          computerMove = "scissors";
+        }
+        return computerMove; // displays the value in the console!
+      }
+
+      const testButton = document.querySelector(".test");
+      if (testButton.classList.contains("test")) {
+        console.log("Posiada daną klasę");
+      } else {
+        console.log("Nie znaleziono klasy");
+      }
+    </script>
+  </body>
+</html>
+
+<!-- READY, VERY GOOD A++ -->
