@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <h1>To do list practice 1</h1>
-    <input type="text" name="text" id="task" placeholder="Enter your todo">
+  </head>
+  <body>
+    <h2>To do list practice 1</h2>
+    <input type="text" name="text" id="task" placeholder="Enter your todo" />
     <button onclick="displayTask()">Add</button>
-
+    <h2>To do list practice 2</h2>
+    <input type="text" name="" id="todo-second" />
+    <button onclick="addToDo()">Add</button>
+    <div class="tasks-container"></div>
 
     <script>
+      // console.log(newTask)
+      //   allTasks = [];
+      //   function displayTask() {
+      //     const newTask = document.getElementById("task").value;
+      //     allTasks.push(newTask);
+      //     console.log(allTasks);
+      //   }
 
-        // console.log(newTask)
-        allTasks = []
-        
-        function displayTask() {
-            const newTask = document.getElementById('task').value
-            allTasks.push(newTask)
-            console.log(allTasks)
-            
+      secondAllTasks = [];
+      renderToDoList();
 
+      function renderToDoList() {
+        let todoListHTML = ``;
+
+        for (let i = 0; i < secondAllTasks.length; i++) {
+          const todo = secondAllTasks[i];
+          const html = `<p>${todo}</p>`;
+          todoListHTML += html;
         }
+        document.querySelector(".tasks-container").innerHTML = todoListHTML;
+      }
 
+      function addToDo() {
+        const secondInputField = document.getElementById("todo-second");
+        secondAllTasks.push(secondInputField.value);
+        console.log(secondAllTasks);
 
+        secondInputField.value = "";
+        renderToDoList();
+      }
     </script>
-    
-</body>
+  </body>
 </html>
