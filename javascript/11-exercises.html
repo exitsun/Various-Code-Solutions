@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11 Arrays and loops exercises</title>
+  </head>
+  <body>
+    <script>
+      myArray = ["hello", "world", "search", "good", "search"];
+
+      function findWordInArray(arr) {
+        let i;
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] === "search") {
+            console.log(i);
+            return i;
+          }
+        }
+        console.log(-1);
+        return;
+      }
+      findWordInArray(myArray);
+
+      function uniqueArray(arr) {
+        console.log(arr);
+        let unique = [];
+        for (let i = 0; i < arr.length; i++) {
+          if (!unique.includes(arr[i])) {
+            unique.push(arr[i]);
+          }
+        }
+        console.log(unique);
+      }
+      uniqueArray(myArray);
+
+      //   function findMatchingWord(arr, word) {
+      //     let i;
+      //     for (let i = 0; i < arr.length; i++) {
+      //       if (word === arr[i]) {
+      //         console.log(i);
+      //         return;
+      //       }
+      //     }
+      //     console.log(-1);
+      //     return;
+      //   }
+      //   findMatchingWord(myArray, "search");
+
+      //   foodsArray = ["egg", "broccoli", "egg", "ham", "egg", "sausage"];
+      //   function removeEgg(foods) {
+      //     let result = [];
+      //     for (let i = 0; i < foods.length; i++) {
+      //       if (foods[i] === "egg") {
+      //         continue;
+      //       }
+      //       result.push(foods[i]);
+      //     }
+      //     console.log(result);
+      //   }
+
+      //   removeEgg(foodsArray);
+      //   // foodsArray = ["egg", "broccoli", "egg", "ham", "egg", "sausage"];
+      //   function removeFirstTwoEggs(foods) {
+      //     let result = [];
+      //     let countEggs = 0;
+      //     for (let i = 0; i < foods.length; i++) {
+      //       if (foods[i] === "egg" && countEggs < 2) {
+      //         countEggs++;
+      //         continue;
+      //       }
+      //       result.push(foods[i]);
+      //     }
+      //     console.log(result, countEggs);
+      //   }
+      //   removeFirstTwoEggs(foodsArray);
+      //   // foodsArray = ["egg", "broccoli", "egg", "ham", "egg", "sausage"];
+      //   function removeTwoLastEggs(foods) {
+      //     let result = [];
+      //     let countEggs = 0;
+      //     let reversed = foods.slice().reverse();
+      //     console.log(reversed);
+      //     // let reversed = [...foods].reverse();
+      //     for (let i = 0; i < reversed.length; i++) {
+      //       if (reversed[i] === "egg" && countEggs < 2) {
+      //         countEggs++;
+      //         continue;
+      //       }
+      //       result.push(reversed[i]);
+      //     }
+      //     console.log(result.reverse(), countEggs);
+      //   }
+      //   //   expected egg broccoli ham sausage
+      //   removeTwoLastEggs(foodsArray);
+      //   //   console.log(foodsArray);
+
+      //   function fizzBuzz() {
+      //     for (let i = 0; i <= 20; i++) {
+      //       if (i % 3 === 0 && i % 5 === 0) {
+      //         console.log(i, "Fizz Buzz");
+      //       } else if (i % 3 === 0) {
+      //         console.log(i, "Fizz");
+      //       } else if (i % 5 === 0) {
+      //         console.log(i, "Buzz");
+      //       } else {
+      //         console.log(i);
+      //       }
+      //     }
+      //   }
+      //   fizzBuzz();
+    </script>
+  </body>
+</html>
