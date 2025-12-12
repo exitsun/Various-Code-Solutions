@@ -10,15 +10,25 @@ function renderToDoList() {
           <div>${dueDate}</div>
           <div>
             <button
-            class="delete-todo-button" onclick="allTasks.splice(${index}, 1);
-            renderToDoList(); 
-             "
-            >Delete</button>
+              class="delete-todo-button js-delete-todo-button" data-index="${index}">
+              Delete
+             </button>
           </div>
            `; //this deletes the task
     todoListHTML += html;
   });
   document.querySelector(".tasks-container").innerHTML = todoListHTML;
+
+  document
+    .querySelectorAll(".js-delete-todo-button")
+    .forEach((deleteButton) => {
+      deleteButton.addEventListener("click", () => {
+        const index = parseInt(deleteButton.dataset.index);
+        allTasks.splice(index, 1);
+        localStorage.setItem("allTasks", JSON.stringify(allTasks));
+        renderToDoList();
+      });
+    });
 }
 
 function addToDo() {
@@ -29,5 +39,10 @@ function addToDo() {
   allTasks.push({ name: name, dueDate: dueDate }); //name, dueDate <- shorthand property syntax
   localStorage.setItem("allTasks", JSON.stringify(allTasks));
   secondInputField.value = "";
+  dateInputElement.value = "";
   renderToDoList();
 }
+document.querySelector(".js-add-todo-people").addEventListener("click", () => {
+  addToDo();
+});
+// TODO add enter on keydown
