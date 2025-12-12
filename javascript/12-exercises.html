@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>12 Exercises</title>
+  </head>
+  <body>
+    <button class="finished" onclick="finishFunction()">Start</button>
+    <button class="add-to-cart" onclick="addToCart()">Add to cart</button>
+    <button class="increase" onclick="setMsgNum(1)">Add message</button>
+    <button class="decrease" onclick="setMsgNum(-1)">Remove message</button>
+    <p class="message"></p>
+    <script>
+      const add = function () {
+        return 2 + 3;
+      };
+
+      function subtract() {
+        return 2 - 1;
+      }
+
+      function runTwice(add) {
+        for (let i = 0; i < 2; i++) {
+          console.log(add());
+        }
+      }
+      runTwice(add);
+
+      const finishedButton = document.querySelector(".finished");
+      function finishFunction() {
+        finishedButton.innerHTML = "Loading...";
+        setTimeout(function () {
+          finishedButton.innerHTML = "Finished";
+          setTimeout(function () {
+            finishedButton.innerHTML = "Start";
+          }, 4000);
+        }, 1000);
+      }
+      //   const addToCartButton = document.querySelector(".add-to-cart");
+      let timeoutId;
+
+      const messageDisplay = document.querySelector(".message");
+      function addToCart() {
+        messageDisplay.innerHTML = "Added!";
+
+        timeoutId = setTimeout(function () {
+          messageDisplay.innerHTML = "";
+        }, 2000);
+        clearTimeout(timeoutId);
+      }
+
+      let isNotificationON = false;
+      let currentMessageCount = 0;
+      let intervalId;
+
+      function titleNotification() {
+        if (intervalId) {
+          clearInterval(intervalId);
+        }
+        if (currentMessageCount === 0) {
+          document.title = "12 exercises";
+          return;
+        }
+        isNotificationON = false;
+
+        intervalId = setInterval(function () {
+          if (isNotificationON) {
+            document.title = "12 exercises";
+            isNotificationON = false;
+          } else {
+            document.title = `(${currentMessageCount}) messages`;
+            isNotificationON = true;
+          }
+        }, 1000);
+      }
+
+      function setMsgNum(num) {
+        currentMessageCount += num;
+        titleNotification();
+      }
+    </script>
+  </body>
+</html>

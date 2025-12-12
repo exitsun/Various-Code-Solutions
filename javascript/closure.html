@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I don't get this but somehow I get this</title>
+  </head>
+  <body>
+    <script>
+      // Fabryka (Funkcja Zewnętrzna)
+      function createPrivateCounter() {
+        let count = 0; // ⬅️ PRYWATNY STAN
+
+        // Zwraca funkcję, która ma dostęp tylko do TEGO count.
+        return function () {
+          count++;
+          console.log(count);
+        };
+      }
+
+      // 1. Tworzymy Licznik A (z jego własnym Plecakiem A)
+      const cartClicks = createPrivateCounter();
+
+      // 2. Tworzymy Licznik B (z jego własnym Plecakiem B)
+      const bannerViews = createPrivateCounter();
+
+      console.log("--- Koszyk ---");
+      cartClicks(); // Działa tylko na Plecaku A. Wypisuje: 1
+      cartClicks(); // Działa tylko na Plecaku A. Wypisuje: 2
+
+      console.log("--- Baner ---");
+      bannerViews(); // Działa tylko na Plecaku B. Wypisuje: 1
+      cartClicks(); // Działa tylko na Plecaku A. Wypisuje: 3
+    </script>
+  </body>
+</html>

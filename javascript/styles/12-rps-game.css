@@ -1,0 +1,59 @@
+body {
+  background-color: rgb(12, 12, 12);
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.title {
+  font-size: 30px;
+  font-weight: bold;
+}
+.move-icon {
+  height: 50px;
+}
+.move-button {
+  background: transparent;
+  border: 3px solid white;
+  border-radius: 50%;
+  padding: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.move-icon {
+  height: 40px;
+}
+.outcome {
+  font-size: 25px;
+  font-weight: bold;
+  margin: 50px 0;
+}
+.match-history {
+  margin-top: 30px;
+}
+.reset-score-button,
+.auto-play-button {
+  padding: 10px 30px;
+  cursor: pointer;
+}
+.extra {
+  margin: 10px 0;
+  padding: 5px 40px;
+  border-radius: 15px;
+  border: none;
+  background-color: rgb(255, 216, 20);
+  text-decoration: none;
+  color: black;
+}
+.extra:hover {
+  background-color: #e2c108;
+  color: rgb(36, 36, 36);
+}
+.category-button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(58, 58, 58);
+  cursor: pointer;
+}
+.is-toggled {
+  background-color: whitesmoke;
+}

@@ -3,24 +3,21 @@ renderToDoList();
 
 function renderToDoList() {
   let todoListHTML = ``;
-
-  for (let i = 0; i < allTasks.length; i++) {
-    const todoObject = allTasks[i];
-    const name = todoObject.name;
-    const dueDate = todoObject.dueDate;
+  allTasks.forEach((todoObject, index) => {
+    const { name, dueDate } = todoObject;
     const html = `
           <div> ${name}</div>
           <div>${dueDate}</div>
           <div>
             <button
-            class="delete-todo-button" onclick="allTasks.splice(${i}, 1); 
-            renderToDoList();
+            class="delete-todo-button" onclick="allTasks.splice(${index}, 1);
+            renderToDoList(); 
              "
             >Delete</button>
           </div>
            `; //this deletes the task
     todoListHTML += html;
-  }
+  });
   document.querySelector(".tasks-container").innerHTML = todoListHTML;
 }
 

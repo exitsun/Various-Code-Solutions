@@ -3,7 +3,103 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Advanced functions</title>
   </head>
-  <body></body>
+  <body>
+    <button class="button-click">click</button>
+    <script>
+      const buttonElement = document.querySelector(".button-click");
+
+      const fallbackFunction1 = () => {
+        console.log("click");
+      };
+      buttonElement.addEventListener("click", fallbackFunction1());
+      buttonElement.removeEventListener("click", fallbackFunction1());
+      buttonElement.addEventListener("click", () => {
+        console.log("click2");
+      });
+
+      /*function greeting() {
+        console.log("Hello!");
+      }
+      const num = 2;
+      const function1 = function () {
+        console.log("hello2");
+      };
+      console.log(function1);
+      console.log(typeof function1);
+      function1();
+      greeting();
+      const object1 = {
+        num: 2,
+        fun: function greeting() {
+          console.log("hello3");
+        },
+      };
+      object1.fun(); //call the inside of an object function it's called a method
+
+      function display(param) {
+        console.log(param);
+      }
+      display(2);
+
+      function run(param) {
+        param();
+      }
+      run(function () {
+        console.log("Hello4"); //passing a function into another function: callback
+      });
+
+      setTimeout(function () {
+        console.log("time out!");
+        console.log("time out 2!");
+      }, 3000); //time to wait in ms
+      //asynchronous code -- doesn't block the code for 3 sec
+
+      console.log("next line");
+
+      setInterval(function () {
+        console.log("interval!");
+      }, 3000);
+
+      console.log("nextline2");
+
+      myArray = ["make dinner", "wash dishes", "read book"];
+
+      myArray.forEach((value, index) => {
+        if (value === "wash dishes") {
+          return;
+        }
+        console.log(index);
+        console.log(value);
+      });
+      // for each is a preffered way to loop through an array
+
+      const regularFunction = function (param) {
+        console.log("regular function");
+        return 5;
+      };
+
+      const arrowFunction = (param) => {
+        console.log("hello arrow");
+        return 5;
+      };
+      arrowFunction();
+      regularFunction();
+
+      const oneParam = (param) => {
+        console.log(param + 1);
+      };
+      oneParam(2);
+
+      const oneLine = () => 2 + 3;
+      console.log(oneLine());
+
+      const object2 = {
+        method: () => {},
+        method() {},
+      };
+      */
+    </script>
+  </body>
 </html>
