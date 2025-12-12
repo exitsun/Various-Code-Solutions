@@ -8,34 +8,21 @@
   </head>
   <body>
     <h1 class="title">Rock paper scissors</h1>
-    <button onclick=" playGame('rock')" class="move-button">
+    <button class="move-button" data-move="rock">
       <img src="./rock-emoji.png" class="move-icon" />
     </button>
-    <button onclick=" playGame('paper')" class="move-button">
+    <button class="move-button" data-move="paper">
       <img src="./paper-emoji.png" class="move-icon" />
     </button>
-    <button onclick=" playGame('scissors')" class="move-button">
+    <button class="move-button" data-move="scissors">
       <img src="./scissors-emoji.png" class="move-icon" />
     </button>
 
     <p class="outcome"></p>
     <p class="outcome-detail"></p>
     <p class="match-history"></p>
-    <button
-      oclass="move-icon"
-      onclick="
-    score.wins = 0;
-    score.losses = 0;
-    score.ties = 0; 
-    localStorage.removeItem('score');
-    updateScore()
-    gameOutcome()
-    "
-      class="reset-score-button"
-    >
-      Reset game
-    </button>
-    <button class="auto-play-button" onclick="autoPlay()">Auto Play</button>
+    <button class="reset-button reset-score-button">Reset game</button>
+    <button class="auto-play-button">Auto Play</button>
 
     <script src="./scripts/12-rps-game.js"></script>
   </body>

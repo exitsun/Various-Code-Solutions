@@ -14,6 +14,27 @@ let score = JSON.parse(localStorage.getItem("score")) || {
 updateScore();
 gameOutcome();
 
+const moveButtons = document.querySelectorAll(".move-button");
+moveButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const playerMove = button.dataset.move;
+    playGame(playerMove);
+  });
+});
+const resetButton = document.querySelector(".reset-button");
+resetButton.addEventListener("click", () => {
+  score.wins = 0;
+  score.losses = 0;
+  score.ties = 0;
+  localStorage.removeItem("score");
+  updateScore();
+  gameOutcome();
+});
+const autoPlayButton = document.querySelector(".auto-play-button");
+autoPlayButton.addEventListener("click", () => {
+  autoPlay();
+});
+
 function playGame(playerMove) {
   const computerMove = pickComputerMove();
   let result = "";
@@ -85,7 +106,7 @@ function pickComputerMove() {
 }
 let intervalId;
 
-// const autoPlay = () => {};
+// const autoPlay = () => {}; // can be described as this, but regular function is preffered because of clearer hoisting rules
 
 function autoPlay() {
   if (!isAutoPlaying) {
