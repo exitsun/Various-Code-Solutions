@@ -23,13 +23,43 @@ moveButtons.forEach((button) => {
 });
 const resetButton = document.querySelector(".reset-button");
 resetButton.addEventListener("click", () => {
-  score.wins = 0;
-  score.losses = 0;
-  score.ties = 0;
-  localStorage.removeItem("score");
-  updateScore();
-  gameOutcome();
+  displayResetMessage();
 });
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Backspace") {
+    event.preventDefault();
+    displayResetMessage();
+  }
+});
+
+function displayResetMessage() {
+  const modalSpace = document.querySelector(".modal");
+  let html;
+  html = `Are you sure you want to reset the score?
+  <button class="reset-decision-yes">Yes</button><button class="reset-decision-no">No</button>`;
+  modalSpace.innerHTML = html;
+  const buttonYes = document.querySelector(".reset-decision-yes");
+  const buttonNo = document.querySelector(".reset-decision-no");
+  buttonYes.addEventListener("click", () => {
+    console.log("Yes clicked");
+    score.wins = 0;
+    score.losses = 0;
+    score.ties = 0;
+    localStorage.removeItem("score");
+    updateScore();
+    gameOutcome();
+    modalSpace.innerHTML = "";
+  });
+
+  buttonNo.addEventListener("click", () => {
+    console.log("no clicked");
+    modalSpace.innerHTML = "";
+  });
+}
+
+// TODO event delegation + confirm
+
 const autoPlayButton = document.querySelector(".auto-play-button");
 autoPlayButton.addEventListener("click", () => {
   autoPlay();
@@ -123,6 +153,7 @@ let intervalId;
 function autoPlay() {
   if (!isAutoPlaying) {
     isAutoPlaying = true;
+    autoPlayButton.innerHTML = "Stop playing";
     intervalId = setInterval(() => {
       const playerMove = pickComputerMove();
       playGame(playerMove);
@@ -130,5 +161,13 @@ function autoPlay() {
   } else {
     clearInterval(intervalId);
     isAutoPlaying = false;
+    autoPlayButton.innerHTML = "Auto Play";
   }
 }
+// keyboard
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "a") {
+    autoPlay();
+  }
+});

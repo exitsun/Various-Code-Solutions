@@ -16,9 +16,15 @@
         return 2 + 3;
       };
 
+      const addArrow = () => 2 + 3;
+      console.log(addArrow());
+
       function subtract() {
         return 2 - 1;
       }
+
+      const substractArrow = () => 2 - 1;
+      console.log(substractArrow());
 
       function runTwice(add) {
         for (let i = 0; i < 2; i++) {
@@ -26,6 +32,10 @@
         }
       }
       runTwice(add);
+
+      // const runTwiceArrow = (func) => 2 * add();
+
+      // console.log(runTwiceArrow(addArrow()));
 
       const finishedButton = document.querySelector(".finished");
       function finishFunction() {
@@ -41,6 +51,7 @@
       let timeoutId;
 
       const messageDisplay = document.querySelector(".message");
+
       function addToCart() {
         messageDisplay.innerHTML = "Added!";
 
@@ -79,6 +90,23 @@
         currentMessageCount += num;
         titleNotification();
       }
+
+      const multiply = (num1, num2) => num1 * num2;
+
+      console.log(multiply(2, 3));
+
+      numArray = [-1, 0, 1, 2, 3, 4, 5, 6];
+
+      function countPositive(arr) {
+        const positiveNumbers = arr.filter((element) => {
+          return element > 0;
+        });
+        return positiveNumbers.length;
+      }
+      console.log(countPositive(numArray));
+
+      const addNum = (array, num) => array.map((value) => value + num);
+      console.log(addNum(numArray, 2));
     </script>
   </body>
 </html>
