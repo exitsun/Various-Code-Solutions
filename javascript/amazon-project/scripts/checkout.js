@@ -1,4 +1,4 @@
-import { cart, removeFromCart } from "../data/cart.js";
+import { cart, removeFromCart, updateQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js";
 import { updateCartQuantity } from "../data/cart.js";
@@ -30,10 +30,12 @@ cart.forEach((cartItem) => {
                   matchingProduct.priceCents
                 )}</div>
                 <div class="product-quantity">
-                  <span> Quantity: <span class="quantity-label">${
-                    cartItem.quantity
-                  }</span> </span>
-                  <span class="update-quantity-link link-primary">
+                  <span> Quantity: <span class="quantity-label js-quantity-label-${
+                    matchingProduct.id
+                  } ">${cartItem.quantity}</span> </span>
+                  <span class="update-quantity-link link-primary js-update-quantity-link" data-product-id="${
+                    matchingProduct.id
+                  }" >
                     Update
                   </span>
                   <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${
@@ -91,5 +93,38 @@ document.querySelectorAll(".js-delete-link").forEach((link) => {
     );
     container.remove();
     updateCartQuantity();
+  });
+});
+// kinda quirky today ngl
+
+document.querySelectorAll(".js-update-quantity-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    const { productId } = link.dataset;
+    const quantityUpdater = document.querySelector(
+      `.js-quantity-label-${productId}`
+    );
+
+    let isEditing = link.innerHTML === "Save";
+
+    if (!isEditing) {
+      const currentQuantity = quantityUpdater.innerHTML;
+      quantityUpdater.innerHTML = `<input type="number" size="3" min="1" max="1000" value="${currentQuantity}" class="js-quantity-input-${productId}"></input>`;
+      link.innerHTML = "Save";
+    } else {
+      link.innerHTML = "Update";
+
+      const inputElement = document.querySelector(
+        `.js-quantity-input-${productId}`
+      );
+
+      if (inputElement) {
+        const newQuantity = Number(inputElement.value);
+        if (newQuantity > 0) {
+          quantityUpdater.innerHTML = newQuantity;
+          updateQuantity(productId, newQuantity);
+          updateCartQuantity();
+        }
+      }
+    }
   });
 });
