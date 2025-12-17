@@ -108,18 +108,36 @@ document.querySelectorAll(".js-update-quantity-link").forEach((link) => {
 
     if (!isEditing) {
       const currentQuantity = quantityUpdater.innerHTML;
-      quantityUpdater.innerHTML = `<input type="number" size="3" min="1" max="1000" value="${currentQuantity}" class="js-quantity-input-${productId}"></input>`;
+      quantityUpdater.innerHTML = `<input type="number"
+       size="3"
+        min="1"
+         max="1000"
+          value="${currentQuantity}"
+           class="js-quantity-input-${productId}"
+           ></input>`;
       link.innerHTML = "Save";
-    } else {
-      link.innerHTML = "Update";
 
       const inputElement = document.querySelector(
         `.js-quantity-input-${productId}`
       );
 
       if (inputElement) {
+        inputElement.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            console.log("hello");
+            event.preventDefault();
+            link.click();
+          }
+        });
+      }
+    } else {
+      link.innerHTML = "Update";
+      const inputElement = document.querySelector(
+        `.js-quantity-input-${productId}`
+      );
+      if (inputElement) {
         const newQuantity = Number(inputElement.value);
-        if (newQuantity > 0) {
+        if (newQuantity > 0 && newQuantity < 100) {
           quantityUpdater.innerHTML = newQuantity;
           updateQuantity(productId, newQuantity);
           updateCartQuantity();
