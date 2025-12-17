@@ -58,7 +58,9 @@ export function updateCartQuantity() {
 
   cart.forEach((item) => (cartQuantity += item.quantity));
 
-  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+  document.querySelectorAll(".js-cart-quantity").forEach((occurence) => {
+    occurence.innerHTML = cartQuantity;
+  });
 }
 
 export function updateQuantity(productId, newQuantity) {
