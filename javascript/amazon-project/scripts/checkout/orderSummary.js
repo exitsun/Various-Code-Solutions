@@ -1,9 +1,8 @@
 import { cart, removeFromCart, updateQuantity } from "../../data/cart.js"; //named export
-import { products } from "../../data/products.js";
 import { formatCurrency } from "../../scripts/utils/money.js";
 import { updateCartQuantity } from "../../data/cart.js";
-import dayjs from "https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js"; //default export each file can only have 1 default export
 import {
+  calculateDeliveryDate,
   deliveryOptions,
   getDeliveryOption,
 } from "../../data/deliveryOption.js";
@@ -23,9 +22,7 @@ export function renderOrderSummary() {
     const deliveryOptionId = cartItem.deliveryOptionId;
     const deliveryOption = getDeliveryOption(deliveryOptionId);
 
-    const today = dayjs();
-    const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
-    const dateString = deliveryDate.format("dddd, MMMM D");
+    const { dateString } = calculateDeliveryDate(deliveryOption);
 
     cartSummaryHTML += `
     <div class="cart-item-container js-cart-item-container-${productId}" >
@@ -75,13 +72,7 @@ export function renderOrderSummary() {
   function deliveryOptionsHTML(matchingProduct, cartItem) {
     let html = "";
     deliveryOptions.forEach((deliveryOption) => {
-      const today = dayjs();
-      const deliveryDate = today.add(deliveryOption.deliveryDays, "days");
-      const dateString = deliveryDate.format("dddd, MMMM D");
-      const priceString =
-        deliveryOption.priceCents === 0
-          ? "FREE Shipping"
-          : `$${formatCurrency(deliveryOption.priceCents)} - Shipping`;
+      const { priceString, dateString } = calculateDeliveryDate(deliveryOption);
 
       const isChecked = deliveryOption.id === cartItem.deliveryOptionId;
 
