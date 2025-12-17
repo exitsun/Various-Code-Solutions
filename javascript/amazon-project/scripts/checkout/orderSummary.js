@@ -10,13 +10,9 @@ import {
 } from "../../data/deliveryOption.js";
 import { updateDeliveryOption } from "../../data/cart.js";
 import { getProduct } from "../../data/products.js";
+import { renderPaymentSummary } from "./paymentSummary.js";
 
 updateCartQuantity();
-hello();
-const today = dayjs();
-const deliveryDate = today.add(7, "days");
-console.log(deliveryDate);
-console.log(deliveryDate.format("dddd, MMMM D"));
 
 export function renderOrderSummary() {
   let cartSummaryHTML = "";
@@ -117,6 +113,7 @@ export function renderOrderSummary() {
     link.addEventListener("click", () => {
       const productId = link.dataset.productId;
       removeFromCart(productId);
+      renderPaymentSummary();
 
       const container = document.querySelector(
         `.js-cart-item-container-${productId}`
@@ -171,6 +168,7 @@ export function renderOrderSummary() {
             quantityUpdater.innerHTML = newQuantity;
             updateQuantity(productId, newQuantity);
             updateCartQuantity();
+            renderPaymentSummary();
           }
         }
       }
@@ -182,6 +180,7 @@ export function renderOrderSummary() {
       const { productId, deliveryOptionId } = element.dataset;
       updateDeliveryOption(productId, deliveryOptionId);
       renderOrderSummary(); //recursion
+      renderPaymentSummary();
     });
   });
 }
