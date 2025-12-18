@@ -4,10 +4,10 @@ class Cart {
 
   constructor(localStorageKey) {
     this.#localStorageKey = localStorageKey;
-    this.loadFromStorage();
+    this.#loadFromStorage();
   }
 
-  loadFromStorage() {
+  #loadFromStorage() {
     // shorthand method
     this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey));
 
@@ -107,6 +107,7 @@ class Cart {
 // }
 const cart = new Cart("cart-oop");
 const businessCart = new Cart("cart-business");
+cart.#localStorageKey = "test";
 
 console.log(cart);
 console.log(businessCart);
