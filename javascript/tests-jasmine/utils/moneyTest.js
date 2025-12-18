@@ -1,4 +1,4 @@
-import { formatCurrency } from "../amazon-project/scripts/utils/money.js";
+import { formatCurrency } from "../../amazon-project/scripts/utils/money.js";
 
 describe("Test Suite: formatCurrency", () => {
   it("converts cents into dollars", () => {
