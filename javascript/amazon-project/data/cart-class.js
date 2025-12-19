@@ -107,7 +107,7 @@ class Cart {
 // }
 const cart = new Cart("cart-oop");
 const businessCart = new Cart("cart-business");
-cart.#localStorageKey = "test";
+// cart.#localStorageKey = "test"; this cannot be accessed outside the class
 
 console.log(cart);
 console.log(businessCart);
