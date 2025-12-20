@@ -1,13 +1,15 @@
 import { cart, addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
-import { formatCurrency } from "./utils/money.js";
 import { updateCartQuantity } from "../data/cart.js";
+import { loadProducts } from "../data/products.js";
 
 let productsHTML = "";
 updateCartQuantity();
+loadProducts(renderProductsGrid);
 
-products.forEach((product) => {
-  productsHTML += `
+function renderProductsGrid() {
+  products.forEach((product) => {
+    productsHTML += `
     <div class="product-container">
       <div class="product-image-container">
         <img class="product-image"
@@ -58,35 +60,36 @@ ${product.extraInfoHTML()}
       </button>
     </div>
   `;
-});
-let timeoutId;
-if (timeoutId) {
-  clearTimeout(timeoutId);
-}
-
-document.querySelector(".js-products-grid").innerHTML = productsHTML;
-
-document.querySelectorAll(".js-add-to-cart").forEach((button) => {
-  button.addEventListener("click", () => {
-    const { productId } = button.dataset;
-    const quantitySelector = document.querySelector(
-      `.js-product-quantity-selector-${productId}`
-    );
-    const selectedValue = quantitySelector.value;
-
-    addToCart(productId, selectedValue);
-    updateCartQuantity();
-
-    const addedMessage = document.querySelector(
-      `.js-added-to-cart-${productId}`
-    );
-
-    addedMessage.classList.add("visible");
-
-    timeoutId = setTimeout(() => {
-      if (addedMessage.classList.contains("visible")) {
-        addedMessage.classList.remove("visible");
-      }
-    }, 2000);
   });
-});
+  let timeoutId;
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+  }
+
+  document.querySelector(".js-products-grid").innerHTML = productsHTML;
+
+  document.querySelectorAll(".js-add-to-cart").forEach((button) => {
+    button.addEventListener("click", () => {
+      const { productId } = button.dataset;
+      const quantitySelector = document.querySelector(
+        `.js-product-quantity-selector-${productId}`
+      );
+      const selectedValue = quantitySelector.value;
+
+      addToCart(productId, selectedValue);
+      updateCartQuantity();
+
+      const addedMessage = document.querySelector(
+        `.js-added-to-cart-${productId}`
+      );
+
+      addedMessage.classList.add("visible");
+
+      timeoutId = setTimeout(() => {
+        if (addedMessage.classList.contains("visible")) {
+          addedMessage.classList.remove("visible");
+        }
+      }, 2000);
+    });
+  });
+}
