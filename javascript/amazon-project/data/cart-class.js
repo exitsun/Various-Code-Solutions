@@ -1,4 +1,4 @@
-class Cart {
+export class Cart {
   cartItems;
   #localStorageKey;
 
@@ -105,10 +105,10 @@ class Cart {
 //   };
 //   return cart;
 // }
-const cart = new Cart("cart-oop");
-const businessCart = new Cart("cart-business");
+// const cart = new Cart("cart-oop");
+// const businessCart = new Cart("cart-business");
 // cart.#localStorageKey = "test"; this cannot be accessed outside the class
 
-console.log(cart);
-console.log(businessCart);
-console.log(businessCart instanceof Cart);
+// console.log(cart);
+// console.log(businessCart);
+// console.log(businessCart instanceof Cart);
