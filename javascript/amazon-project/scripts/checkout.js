@@ -4,9 +4,30 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 // import "../data/car.js";
 // import "../data/backend-practice.js";
 import { loadProducts } from "../data/products.js";
+import { loadCart } from "../data/cart.js";
 
-loadProducts(() => {
-  renderCheckoutHeader();
-  renderOrderSummary();
-  renderPaymentSummary();
-});
+new Promise((resolve) => {
+  loadProducts(() => {
+    resolve();
+  });
+})
+  .then(() => {
+    return new Promise((resolve) => {
+      loadCart(() => {
+        resolve();
+      });
+    });
+  })
+  .then(() => {
+    renderCheckoutHeader();
+    renderOrderSummary();
+    renderPaymentSummary();
+  });
+
+// loadProducts(() => {
+//   loadCart(() => {
+// renderCheckoutHeader();
+// renderOrderSummary();
+// renderPaymentSummary();
+//   });
+// });
