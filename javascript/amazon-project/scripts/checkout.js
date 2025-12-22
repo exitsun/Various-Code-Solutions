@@ -7,15 +7,23 @@ import { loadProductsFetch } from "../data/products.js";
 import { loadCart } from "../data/cart.js";
 
 async function loadPage() {
+  try {
+    // throw "error1";
+    await loadProductsFetch(); //await can only be used inside an async function
+
+    const value = await new Promise((resolve, reject) => {
+      // throw "error2";
+      loadCart(() => {
+        // reject("Error 3");
+
+        resolve();
+      });
+    });
+  } catch (error) {
+    console.log("Error occured.");
+  }
   // async makes the function return promise
 
-  await loadProductsFetch(); //await can only be used inside an async function
-
-  const value = await new Promise((resolve) => {
-    loadCart(() => {
-      resolve();
-    });
-  });
   renderCheckoutHeader();
   renderOrderSummary();
   renderPaymentSummary();

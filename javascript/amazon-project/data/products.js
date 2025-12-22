@@ -88,7 +88,10 @@ export function loadProductsFetch() {
         return new Product(productDetails);
       });
       console.log("load products");
-    }); //fetch uses a promise to make an xhr request and also parses the JSON
+    });
+  // .catch(() => {
+  //   console.log("Some error occured");
+  // }); //fetch uses a promise to make an xhr request and also parses the JSON
   return promise;
 }
 
