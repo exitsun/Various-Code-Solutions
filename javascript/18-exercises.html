@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", "https://supersimplebackend.dev/greeting");
+      xhr.send();
+      xhr.addEventListener("load", () => {
+        console.log("Response: ", xhr.response);
+      });
+
+      function getGreeting() {
+        const promise = fetch("https://supersimplebackend.dev/greeting");
+      }
+    </script>
+  </body>
+</html>
