@@ -16,7 +16,40 @@
 
       function getGreeting() {
         const promise = fetch("https://supersimplebackend.dev/greeting");
+        console.log(promise);
       }
+      getGreeting();
+
+      async function asyncGreeting() {
+        console.log("Starting...");
+        const response = await fetch("https://supersimplebackend.dev/greeting");
+        const text = await response.text();
+        console.log("This is the response:", text);
+      }
+
+      asyncGreeting();
+
+      async function asyncPostGreeting() {
+        try {
+          const response = await fetch(
+            "https://supersimplebackend.dev/greeting",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                name: "AX",
+              }),
+            }
+          );
+          const message = await response.text();
+          console.log(message);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      asyncPostGreeting();
       //
     </script>
   </body>
