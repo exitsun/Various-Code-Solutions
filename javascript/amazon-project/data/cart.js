@@ -99,15 +99,24 @@ export function updateDeliveryOption(productId, deliveryOptionId) {
 
 export let products = [];
 
-export function loadCart(fun) {
-  const xhr = new XMLHttpRequest();
-
-  xhr.addEventListener("load", () => {
-    console.log(xhr.response);
+export async function loadCartFetch(fun) {
+  const response = await fetch("https://supersimplebackend.dev/cart", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
+  console.log(response);
+  const cartData = await response.text();
+  console.log(cartData);
+  // const xhr = new XMLHttpRequest();
 
-  fun();
+  // xhr.addEventListener("load", () => {
+  //   console.log(xhr.response);
+  // });
 
-  xhr.open("GET", "https://supersimplebackend.dev/cart");
-  xhr.send();
+  // fun();
+
+  // xhr.open("GET", "https://supersimplebackend.dev/cart");
+  // xhr.send();
 }

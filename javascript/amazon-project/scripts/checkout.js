@@ -4,7 +4,7 @@ import { renderPaymentSummary } from "./checkout/paymentSummary.js";
 // import "../data/car.js";
 // import "../data/backend-practice.js";
 import { loadProductsFetch } from "../data/products.js";
-import { loadCart } from "../data/cart.js";
+import { loadCartFetch } from "../data/cart.js";
 
 async function loadPage() {
   try {
@@ -30,19 +30,19 @@ async function loadPage() {
 }
 loadPage();
 
-// Promise.all([
-//   loadProductsFetch(),
-//   new Promise((resolve) => {
-//     loadCart(() => {
-//       resolve();
-//     });
-//   }),
-// ]).then((values) => {
-//   console.log(values);
-//   renderCheckoutHeader();
-//   renderOrderSummary();
-//   renderPaymentSummary();
-// });
+Promise.all([
+  loadProductsFetch(),
+  new Promise((resolve) => {
+    loadCartFetch(() => {
+      resolve();
+    });
+  }),
+]).then((values) => {
+  console.log(values);
+  renderCheckoutHeader();
+  renderOrderSummary();
+  renderPaymentSummary();
+});
 
 // new Promise((resolve) => {
 //   loadProducts(() => {
