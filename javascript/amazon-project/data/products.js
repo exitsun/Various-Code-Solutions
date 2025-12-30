@@ -1,4 +1,5 @@
 import { formatCurrency } from "../scripts/utils/money.js";
+import { loadCartFetch } from "./cart.js";
 
 export function getProduct(productId) {
   let matchingProduct;
@@ -72,7 +73,9 @@ class Appliance extends Product {
 export let products = [];
 
 export function loadProductsFetch() {
-  const promise = fetch("https://supersimplebackend.dev/products")
+  const promise = fetch("https://supersimplebackend.dev/products", {
+    method: "GET",
+  })
     .then((response) => {
       return response.json();
     })

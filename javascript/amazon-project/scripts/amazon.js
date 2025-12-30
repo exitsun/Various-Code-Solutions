@@ -1,11 +1,20 @@
-import { cart, addToCart } from "../data/cart.js";
+import { addToCart } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { updateCartQuantity } from "../data/cart.js";
-import { loadProducts } from "../data/products.js";
+import { loadProductsFetch } from "../data/products.js";
 
 let productsHTML = "";
 updateCartQuantity();
-loadProducts(renderProductsGrid);
+
+async function init() {
+  try {
+    const products = await loadProductsFetch();
+    renderProductsGrid(products);
+  } catch (err) {
+    console.log(err);
+  }
+}
+init();
 
 function renderProductsGrid() {
   products.forEach((product) => {
