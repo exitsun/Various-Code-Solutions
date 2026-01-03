@@ -1,4 +1,5 @@
 import { formatCurrency } from "../scripts/utils/money.js";
+import { loadProductsFetch } from "./products.js";
 
 export let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
@@ -11,32 +12,26 @@ function saveToStorage() {
   localStorage.setItem("orders", JSON.stringify(orders));
 }
 
-// pass the data
-// generate the html
+// function uuidv4() {
+//   return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
+//     (
+//       +c ^
+//       (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (+c / 4)))
+//     ).toString(16)
+//   );
+// }
 
-// orders: date total order ID products
-// generate unique UUID for an order.
-// Source - https://stackoverflow.com/a/2117523
-// Posted by broofa, modified by community. See post 'Timeline' for change history
-// Retrieved 2026-01-03, License - CC BY-SA 4.0
+// console.log(uuidv4());
 
-function uuidv4() {
-  return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, (c) =>
-    (
-      +c ^
-      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (+c / 4)))
-    ).toString(16)
-  );
-}
-
-console.log(uuidv4());
-
-function renderOrdersSummary() {
+async function renderOrdersSummary() {
+  const allProducts = await loadProductsFetch();
+  console.log(allProducts);
   orders.forEach((order) => {
     order.orderTime = new Date(order.orderTime).toLocaleString("en-US", {
       month: "long",
       day: "numeric",
     });
+
     const ordersSummaryHTML = `
   <div class="order-container">
           <div class="order-header">
@@ -64,7 +59,7 @@ function renderOrdersSummary() {
 
             <div class="product-details">
               <div class="product-name">
-                Black and Gray Athletic Cotton Socks - 6 Pairs
+                placeholder
               </div>
               <div class="product-delivery-date">Arriving on: August 15</div>
               <div class="product-quantity">Quantity: 1</div>
