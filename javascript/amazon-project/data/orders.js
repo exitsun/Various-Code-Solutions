@@ -32,6 +32,10 @@ async function renderOrdersSummary() {
       day: "numeric",
     });
 
+    // allProducts.forEach((product)=> {
+
+    // })
+
     const ordersSummaryHTML = `
   <div class="order-container">
           <div class="order-header">

@@ -120,3 +120,8 @@ export async function loadCartFetch(fun) {
   // xhr.open("GET", "https://supersimplebackend.dev/cart");
   // xhr.send();
 }
+
+export function emptyCart() {
+  cart = [];
+  saveToStorage();
+}

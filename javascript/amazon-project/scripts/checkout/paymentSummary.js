@@ -1,4 +1,4 @@
-import { cart, updateCartQuantity } from "../../data/cart.js";
+import { cart, updateCartQuantity, emptyCart } from "../../data/cart.js";
 import { getProduct } from "../../data/products.js";
 import { getDeliveryOption } from "../../data/deliveryOption.js";
 import { formatCurrency } from "../utils/money.js";
@@ -85,6 +85,7 @@ export function renderPaymentSummary() {
       } catch (error) {
         console.log(error);
       }
+      emptyCart();
 
       window.location.href = "orders.html";
     });
