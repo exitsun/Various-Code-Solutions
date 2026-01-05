@@ -1,5 +1,5 @@
 import { formatCurrency } from "../scripts/utils/money.js";
-import { loadProductsFetch } from "./products.js";
+import { products, loadProductsFetch } from "./products.js";
 
 export let orders = JSON.parse(localStorage.getItem("orders")) || [];
 
@@ -23,20 +23,39 @@ function saveToStorage() {
 
 // console.log(uuidv4());
 
+// async function init() {
+//   try {
+//     const productsData = await loadProductsFetch();
+//     console.log(productsData);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// }
+// init();
+
 async function renderOrdersSummary() {
   const allProducts = await loadProductsFetch();
   console.log(allProducts);
   orders.forEach((order) => {
+    console.log(order);
     order.orderTime = new Date(order.orderTime).toLocaleString("en-US", {
       month: "long",
       day: "numeric",
     });
 
-    // allProducts.forEach((product)=> {
+    // display the order
 
-    // })
+    const orderProducts = order.products;
 
-    const ordersSummaryHTML = `
+    console.log(orderProducts);
+
+    orderProducts.forEach((orderItem) => {
+      const matchingProduct = products.find((product) => {
+        return product.id === orderItem.productId;
+      });
+
+      if (matchingProduct) {
+        const ordersSummaryHTML = `
   <div class="order-container">
           <div class="order-header">
             <div class="order-header-left-section">
@@ -63,10 +82,14 @@ async function renderOrdersSummary() {
 
             <div class="product-details">
               <div class="product-name">
-                placeholder
+                ${matchingProduct.name}
               </div>
-              <div class="product-delivery-date">Arriving on: August 15</div>
-              <div class="product-quantity">Quantity: 1</div>
+              <div class="product-delivery-date">Arriving on: ${
+                orderItem.estimatedDeliveryTime
+              }</div>
+              <div class="product-quantity">Quantity: ${
+                orderItem.quantity
+              }</div>
               <button class="buy-again-button button-primary">
                 <img class="buy-again-icon" src="images/icons/buy-again.png" />
                 <span class="buy-again-message">Buy it again</span>
@@ -110,7 +133,9 @@ async function renderOrdersSummary() {
         </div>
   
   `;
-    document.querySelector(".js-order-grid").innerHTML += ordersSummaryHTML;
+        document.querySelector(".js-order-grid").innerHTML += ordersSummaryHTML;
+      }
+    });
   });
 }
 renderOrdersSummary();
