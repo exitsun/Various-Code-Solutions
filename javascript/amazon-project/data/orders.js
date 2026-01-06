@@ -121,14 +121,11 @@ async function renderOrdersSummary() {
 
   document.querySelectorAll(".js-buy-again-button").forEach((button) => {
     button.addEventListener("click", () => {
-      // Pobieramy ID z datasetu, który zapisałaś w HTML
       const { productId } = button.dataset;
 
-      // Dodajemy do koszyka
       addToCart(productId, 1);
       updateCartQuantity();
 
-      // Feedback wizualny
       button.innerHTML = "Added!";
       setTimeout(() => {
         button.innerHTML = `
