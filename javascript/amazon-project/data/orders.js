@@ -114,7 +114,7 @@ async function renderOrdersSummary() {
   `;
       }
     });
-    orderHTML += `<div></div>`;
+    orderHTML += `</div>`;
     finalHTML += orderHTML;
   });
   document.querySelector(".js-order-grid").innerHTML = finalHTML;
