@@ -2,6 +2,7 @@ import { formatCurrency } from "../scripts/utils/money.js";
 import { products, loadProductsFetch } from "./products.js";
 import { addToCart, updateCartQuantity } from "./cart.js";
 import { orderHistory } from "../scripts/checkout/orderHistory.js";
+import { formatDate } from "../scripts/utils/dateFormat.js";
 
 export let orders = JSON.parse(localStorage.getItem("orders")) || [];
 console.log(orders);
@@ -45,12 +46,13 @@ async function renderOrdersSummary() {
   const allProducts = await loadProductsFetch();
   // console.log(allProducts);
   let finalHTML = "";
-  orders.forEach((order) => {
+  const allOrders = [...orders, ...orderHistory];
+  allOrders.forEach((order) => {
     // console.log(order);
-    order.orderTime = new Date(order.orderTime).toLocaleString("en-US", {
-      month: "long",
-      day: "numeric",
-    });
+    // order.orderTime = new Date(order.orderTime).toLocaleString("en-US", {
+    //   month: "long",
+    //   day: "numeric",
+    // });
 
     // display the order
 
@@ -60,7 +62,7 @@ async function renderOrdersSummary() {
             <div class="order-header-left-section">
               <div class="order-date">
                 <div class="order-header-label">Order Placed:</div>
-                <div>${order.orderTime}</div>
+                <div>${formatDate(order.orderTime)}</div>
               </div>
               <div class="order-total">
                 <div class="order-header-label">Total:</div>
@@ -83,12 +85,12 @@ async function renderOrdersSummary() {
 
     orderProducts.forEach((orderItem) => {
       // console.log(orderItem);
-      orderItem.estimatedDeliveryTime = new Date(
-        orderItem.estimatedDeliveryTime
-      ).toLocaleString("en-US", {
-        month: "long",
-        day: "numeric",
-      });
+      // orderItem.estimatedDeliveryTime = new Date(
+      //   orderItem.estimatedDeliveryTime
+      // ).toLocaleString("en-US", {
+      //   month: "long",
+      //   day: "numeric",
+      // });
       const matchingProduct = products.find((product) => {
         return product.id === orderItem.productId;
       });
@@ -104,9 +106,15 @@ async function renderOrdersSummary() {
               <div class="product-name">
                 ${matchingProduct.name}
               </div>
-              <div class="product-delivery-date">Arriving on: ${orderItem.estimatedDeliveryTime}</div>
-              <div class="product-quantity">Quantity: ${orderItem.quantity}</div>
-              <button class="buy-again-button button-primary js-buy-again-button" data-product-id="${matchingProduct.id}" >
+              <div class="product-delivery-date">Arriving on: ${formatDate(
+                orderItem.estimatedDeliveryTime
+              )}</div>
+              <div class="product-quantity">Quantity: ${
+                orderItem.quantity
+              }</div>
+              <button class="buy-again-button button-primary js-buy-again-button" data-product-id="${
+                matchingProduct.id
+              }" >
                 <img class="buy-again-icon" src="images/icons/buy-again.png" />
                 <span class="buy-again-message">Buy it again</span>
               </button>
