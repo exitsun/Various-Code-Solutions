@@ -1,16 +1,23 @@
 import { formatCurrency } from "../scripts/utils/money.js";
 import { products, loadProductsFetch } from "./products.js";
 import { addToCart, updateCartQuantity } from "./cart.js";
+import { orderHistory } from "../scripts/checkout/orderHistory.js";
 
 export let orders = JSON.parse(localStorage.getItem("orders")) || [];
+console.log(orders);
 
 export function addOrder(order) {
-  orders.unshift(order);
+  if (orders.length > 0) {
+    orderHistory.unshift(...orders);
+  }
+  orders = [order];
+
   saveToStorage();
 }
 
 function saveToStorage() {
   localStorage.setItem("orders", JSON.stringify(orders));
+  localStorage.setItem("order-history", JSON.stringify(orderHistory));
 }
 
 // function uuidv4() {
@@ -36,10 +43,10 @@ function saveToStorage() {
 
 async function renderOrdersSummary() {
   const allProducts = await loadProductsFetch();
-  console.log(allProducts);
+  // console.log(allProducts);
   let finalHTML = "";
   orders.forEach((order) => {
-    console.log(order);
+    // console.log(order);
     order.orderTime = new Date(order.orderTime).toLocaleString("en-US", {
       month: "long",
       day: "numeric",
@@ -72,9 +79,10 @@ async function renderOrdersSummary() {
 
     const orderProducts = order.products;
 
-    console.log(orderProducts);
+    // console.log(orderProducts);
 
     orderProducts.forEach((orderItem) => {
+      // console.log(orderItem);
       orderItem.estimatedDeliveryTime = new Date(
         orderItem.estimatedDeliveryTime
       ).toLocaleString("en-US", {
