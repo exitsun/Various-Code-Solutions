@@ -3,7 +3,7 @@ export function formatDate(date) {
     return "";
   }
 
-  const dateObject = new Date();
+  const dateObject = new Date(date); //fixed lol
   if (isNaN(dateObject.getTime())) {
     return "Invalid Date";
   }

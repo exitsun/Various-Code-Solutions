@@ -121,7 +121,9 @@ async function renderOrdersSummary() {
             </div>
 
             <div class="product-actions">
-              <a href="tracking.html">
+              <a href="tracking.html?orderId=${order.id}&productId=${
+          matchingProduct.id
+        }">
                 <button class="track-package-button button-secondary">
                   Track package
                 </button>
